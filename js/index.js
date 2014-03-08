@@ -34,6 +34,11 @@ var app = {
   // The scope of 'this' is the event. In order to call the 'receivedEvent'
   // function, we must explicity call 'app.receivedEvent(...);'
   onDeviceReady: function() {
+  
+     var apiKey = "44682012";
+     var sessionId = "2_MX40NDY4MjAxMn5-U2F0IE1hciAwOCAxMDo0ODoxMSBQU1QgMjAxNH4wLjQ1NDc2OTk3fg";
+     var token = "T1==cGFydG5lcl9pZD00NDY4MjAxMiZzZGtfdmVyc2lvbj10YnJ1YnktdGJyYi12MC45MS4yMDExLTAyLTE3JnNpZz00NTMzZDI0ZGU3MWU1NzcyN2FiYzk0MTY3ZDYyNzkzZjk4YTMwMzUxOnJvbGU9cHVibGlzaGVyJnNlc3Npb25faWQ9Ml9NWDQwTkRZNE1qQXhNbjUtVTJGMElFMWhjaUF3T0NBeE1EbzBPRG94TVNCUVUxUWdNakF4Tkg0d0xqUTFORGMyT1RrM2ZnJmNyZWF0ZV90aW1lPTEzOTQzMDQ0OTEmbm9uY2U9MC44NDkyNDE2NTIwODM5NTMzJmV4cGlyZV90aW1lPTEzOTQzOTA4OTEmY29ubmVjdGlvbl9kYXRhPQ==";
+
     $.get("https://opentokrtc.com/cordova.json", function( data ){
       var publisher = TB.initPublisher(data.apiKey,'myPublisherDiv');
 
@@ -49,7 +54,7 @@ var app = {
             session.subscribe( event.stream, div.id, {subscribeToAudio: false} );
         }
       });
-      session.connect( data.apiKey, data.token );
+      session.connect( apiKey, token );
     });
   },
   // Update DOM on a Received Event
