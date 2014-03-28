@@ -47,7 +47,7 @@
               <input id="password" name="pwd" type="password" placeholder="Password">
               <input type="submit" value="Login"> <!--nevim jestli to je touch-->
             </form>
-
+            <button id="but">hello</button>
             <div id="result"></div>
            
         </div>
@@ -78,6 +78,9 @@
                      var content = $( data ).find( "#content" );
                      $( "#result" ).empty().append( content );
                    });*/
+            });
+            $("#but").click(function (event) {
+                $("#result").empty().append("click");
             });
         </script>
     </body>
