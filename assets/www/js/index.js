@@ -37,16 +37,28 @@ var app = {
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    receivedEvent: function() {
+        $.get("https://opentokrtc.com/cordova.json", function( data ){
+            var publisher = TB.initPublisher(data.apiKey,'myPublisherDiv');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
+            var session = TB.initSession( data.sid ); 
+            session.on({
+                'sessionConnected': function( event ){
+                    session.publish( publisher );
+                },
+                'streamCreated': function( event ){
+                    var div = document.createElement('div');
+                    div.setAttribute('id', 'stream' + event.stream.streamId);
+                    document.body.appendChild(div);
+                    session.subscribe( event.stream, div.id, {subscribeToAudio: false} );
+                }
+            });
+            session.connect( data.apiKey, data.token );
+        });
     }
          
   
 };
+
+
+
